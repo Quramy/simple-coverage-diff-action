@@ -21,7 +21,7 @@ async function main() {
   const repo = context.repo
   const issue_number = context.payload?.pull_request?.number
 
-  const body = bodyHeader + "\n" + results + "\n" + bodyFooter
+  const body = bodyHeader + "\n\n" + results + "\n\n" + bodyFooter
 
   if (issue_number != null) {
     await octokit.rest.issues.createComment({
