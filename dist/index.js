@@ -583,10 +583,10 @@ var libExports = requireLib();
 
 async function main() {
     const githubToken = core.getInput("github-token");
-    const coverageFilename = core.getInput("coverage-filename");
-    const baseSummaryFilename = core.getInput("base-summary-filename");
-    const coverage = JSON.parse(await promises.readFile(coverageFilename, "utf-8"));
-    const baseSummary = JSON.parse(await promises.readFile(baseSummaryFilename, "utf-8"));
+    const headSummaryJsonFilename = core.getInput("head-summary-json");
+    const baseSummaryJsonFileName = core.getInput("base-summary-json");
+    const coverage = JSON.parse(await promises.readFile(headSummaryJsonFilename, "utf-8"));
+    const baseSummary = JSON.parse(await promises.readFile(baseSummaryJsonFileName, "utf-8"));
     const octokit = github.getOctokit(githubToken);
     const { results: body } = libExports.diff(baseSummary, coverage, {});
     const repo = github.context.repo;
@@ -597,6 +597,9 @@ async function main() {
             issue_number,
             body,
         });
+    }
+    else {
+        core.info("Skip because context does not have pull_request");
     }
 }
 main();
