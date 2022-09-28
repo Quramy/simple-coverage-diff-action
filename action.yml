@@ -14,6 +14,14 @@ inputs:
   base-summary-json:
     description: Path of the json-summary file to compare.
     required: true
+  body-header:
+    description: Comment body header part.
+    default: ""
+    required: false
+  body-footer:
+    description: Comment body footer part.
+    default: ""
+    required: false
   github-token:
     description: A GitHub token to write comments.
     required: true

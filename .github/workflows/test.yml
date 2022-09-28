@@ -45,3 +45,15 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           base-summary-json: coverage/coverage-summary-base.json
           head-summary-json: coverage/coverage-summary.json
+
+      - name: Test action.yml (Header and Footer)
+        uses: ./
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          base-summary-json: coverage/coverage-summary-base.json
+          head-summary-json: coverage/coverage-summary-base.json
+          body-header: |
+            ## Hi
+          body-footer: |
+            ---
+            [Link to GitHub](https://github.com/quramy)
