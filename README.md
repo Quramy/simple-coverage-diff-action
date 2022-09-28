@@ -32,18 +32,24 @@ jobs:
         with:
           base-summary-json: coverage-summary.json
           head-summary-json: coverage/coverage-summary.json
+          coverage-threshold: 80
+          check-criteria: lines, branches
           github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ## Inputs
 
-| Name                | Required | Default                          | Description                          |
-| :------------------ | :------- | :------------------------------- | :----------------------------------- |
-| `base-summary-json` | YES      |                                  | File path to base json-summary file. |
-| `head-summary-json` |          | `coverage/coverage-summary.json` | File path to HEAD json-summary file. |
-| `body-header`       |          | `''`                             | Comment body header part.            |
-| `body-footer`       |          | `''`                             | Comment body footer part.            |
-| `github-token`      | YES      | `${{ github.token }}`            | GitHub token.                        |
+| Name                          | Required | Default                          | Description                                                                                         |
+| :---------------------------- | :------- | :------------------------------- | :-------------------------------------------------------------------------------------------------- |
+| `base-summary-json`           | YES      |                                  | File path to base json-summary file.                                                                |
+| `head-summary-json`           |          | `coverage/coverage-summary.json` | File path to HEAD json-summary file.                                                                |
+| `check-criteria`              |          |                                  | See [coverage-diff docs](https://flaviusone.github.io/coverage-diff/interfaces/ConfigOptions.html). |
+| `coverage-threshold`          |          |                                  | See [coverage-diff docs](https://flaviusone.github.io/coverage-diff/interfaces/ConfigOptions.html). |
+| `coverage-decrease-threshold` |          |                                  | See [coverage-diff docs](https://flaviusone.github.io/coverage-diff/interfaces/ConfigOptions.html). |
+| `new-file-coverage-threshold` |          |                                  | See [coverage-diff docs](https://flaviusone.github.io/coverage-diff/interfaces/ConfigOptions.html). |
+| `body-header`                 |          | `''`                             | Comment body header part.                                                                           |
+| `body-footer`                 |          | `''`                             | Comment body footer part.                                                                           |
+| `github-token`                | YES      | `${{ github.token }}`            | GitHub token.                                                                                       |
 
 ## License
 
