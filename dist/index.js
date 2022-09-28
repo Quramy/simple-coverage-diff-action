@@ -585,12 +585,15 @@ async function main() {
     const githubToken = core.getInput("github-token");
     const headSummaryJsonFilename = core.getInput("head-summary-json");
     const baseSummaryJsonFileName = core.getInput("base-summary-json");
+    const bodyHeader = core.getInput("body-header").trim();
+    const bodyFooter = core.getInput("body-footer").trim();
     const coverage = JSON.parse(await promises.readFile(headSummaryJsonFilename, "utf-8"));
     const baseSummary = JSON.parse(await promises.readFile(baseSummaryJsonFileName, "utf-8"));
     const octokit = github.getOctokit(githubToken);
-    const { results: body } = libExports.diff(baseSummary, coverage, {});
+    const { results } = libExports.diff(baseSummary, coverage, {});
     const repo = github.context.repo;
     const issue_number = github.context.payload?.pull_request?.number;
+    const body = bodyHeader + "\n" + results + "\n" + bodyFooter;
     if (issue_number != null) {
         await octokit.rest.issues.createComment({
             ...repo,

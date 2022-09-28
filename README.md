@@ -41,6 +41,8 @@ jobs:
 | :------------------ | :------- | :------------------------------- | :----------------------------------- |
 | `base-summary-json` | YES      |                                  | File path to base json-summary file. |
 | `head-summary-json` |          | `coverage/coverage-summary.json` | File path to HEAD json-summary file. |
+| `body-header`       |          | ``                               | Comment body header part.            |
+| `body-footer`       |          | ``                               | Comment body footer part.            |
 | `github-token`      | YES      | `${{ github.token }}`            | GitHub token.                        |
 
 ## License
