@@ -30,7 +30,7 @@ jobs:
           CI: true
 
       - name: Test action.yml
-        uses: .
+        uses: ./
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           coverage-filename: coverage/coverage-summary.json
