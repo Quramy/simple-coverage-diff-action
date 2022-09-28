@@ -1,1 +1,3 @@
 # coverage-diff-action
+
+test
