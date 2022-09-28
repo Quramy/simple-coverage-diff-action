@@ -10310,7 +10310,7 @@ async function main() {
     const { results } = (0,lib.diff)(baseSummary, coverage, {});
     const repo = github.context.repo;
     const issue_number = github.context.payload.pull_request.number;
-    const body = bodyHeader + "\n" + results + "\n" + bodyFooter;
+    const body = bodyHeader + "\n\n" + results + "\n\n" + bodyFooter;
     if (issue_number != null) {
         await octokit.rest.issues.createComment({
             ...repo,
