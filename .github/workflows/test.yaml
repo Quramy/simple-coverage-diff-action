@@ -10,16 +10,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x]
-
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 16
           cache: npm
       - run: npm ci
       - run: |
@@ -36,21 +31,21 @@ jobs:
         env:
           CI: true
 
-      - name: Test action.yml (No changes)
+      - name: Test action.yaml (No changes)
         uses: ./
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           base-summary-json: coverage/coverage-summary-base.json
           head-summary-json: coverage/coverage-summary-base.json
 
-      - name: Test action.yml (Increase)
+      - name: Test action.yaml (Increase)
         uses: ./
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           base-summary-json: coverage/coverage-summary-base.json
           head-summary-json: coverage/coverage-summary.json
 
-      - name: Test action.yml (Header and Footer)
+      - name: Test action.yaml (Header and Footer)
         uses: ./
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -60,4 +55,4 @@ jobs:
             ## Hi
           body-footer: |
             ---
-            [Link to GitHub](https://github.com/quramy)
+            [Link to GitHub](https://github.com)
