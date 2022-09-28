@@ -1,5 +1,9 @@
-import { foo } from "./main"
+import * as Main from "./main"
 
-test(foo.name, () => {
-  expect(foo("A")).toBe("A")
+test(Main.foo.name, () => {
+  expect(Main.foo("A")).toBe("A")
+})
+
+test(Main.hoge.name, () => {
+  expect(Main.hoge()).toBe("hoge")
 })
