@@ -20,18 +20,28 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+          cache: npm
       - name: npm install, build, and test
         run: |
           npm ci
           npm run clean
           npm run build
-          npm test
+          npm run test:base
+          cp coverage/coverage-summary.json coverage/coverage-summary-base.json
+          npm run test:head
         env:
           CI: true
 
-      - name: Test action.yml
+      - name: Test action.yml (No changes)
         uses: ./
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          coverage-filename: coverage/coverage-summary.json
-          base-summary-filename: coverage/coverage-summary.json
+          base-summary-json: coverage/coverage-summary-base.json
+          head-summary-json: coverage/coverage-summary-base.json
+
+      - name: Test action.yml (Increase)
+        uses: ./
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          base-summary-json: coverage/coverage-summary-base.json
+          head-summary-json: coverage/coverage-summary.json

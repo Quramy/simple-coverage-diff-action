@@ -9,7 +9,7 @@ export default {
   },
   testMatch: ["**/?(*.)+(spec|test).?([mc])[jt]s"],
   testPathIgnorePatterns: ["/node_modules/", "/.rollup.cache/", "\\.d\\.ts$", "dist/.*"],
-  collectCoverageFrom: ["src/**/*.?([mc])ts", "!src/**/*.test.*"],
+  collectCoverageFrom: ["test/**/*.?([mc])ts", "!test/**/*.test.*"],
   coverageReporters: ["json-summary", ["text", { skipFull: true }]],
   moduleFileExtensions: ["ts", "mts", "cts", "js", "mjs", "cjs", "json"],
 }

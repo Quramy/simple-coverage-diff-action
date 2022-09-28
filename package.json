@@ -4,7 +4,8 @@
   "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf \"dist/**/*\" \"*.tsbuildinfo\" .rollup.cache coverage",
-    "test": "jest --coverage",
+    "test:base": "jest --coverage -t \"foo\"",
+    "test:head": "jest --coverage",
     "compile": "tsc --noEmit",
     "build": "rollup --config rollup.config.mjs",
     "prettier": "prettier \"*.md\" \"*.json\" \"*.yml\" \"src/**/*\"",
