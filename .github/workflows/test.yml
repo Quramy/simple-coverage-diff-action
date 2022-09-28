@@ -21,11 +21,15 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
-      - name: npm install, build, and test
-        run: |
-          npm ci
+      - run: npm ci
+      - run: |
+          npm run lint
+          npm run compile
           npm run clean
           npm run build
+
+      - name: Generate coverage json-summary files for action test
+        run: |
           npm run test:base
           cp coverage/coverage-summary.json coverage/coverage-summary-base.json
           npm run test:head

@@ -1,7 +1,6 @@
 name: Build
 
 on:
-  pull_request:
   push:
     branches:
       - main
@@ -20,11 +19,15 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install, build, and test
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Commit and push
         run: |
-          npm ci
-          npm run compile
-          npm run lint 
-          npm run build
+          git config --global user.email "yosuke.kurami@gmai.com"
+          git config --global user.name "Quramy"
+          git add dist
+          git commit -m 'update distribution' && git push ${REPO} main || true
         env:
-          CI: true
+          REPO: https://${{github.actor}}:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git
