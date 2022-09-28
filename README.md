@@ -1,6 +1,6 @@
 # simple-coverage-diff-action
 
-GitHub Action to write test coverage diff to your PR using [coverage-diff](https://www.npmjs.com/package/coverage-diff).
+GitHub Action to comment coverage diff to your PR using [coverage-diff](https://www.npmjs.com/package/coverage-diff).
 
 ## Usage
 
@@ -41,8 +41,8 @@ jobs:
 | :------------------ | :------- | :------------------------------- | :----------------------------------- |
 | `base-summary-json` | YES      |                                  | File path to base json-summary file. |
 | `head-summary-json` |          | `coverage/coverage-summary.json` | File path to HEAD json-summary file. |
-| `body-header`       |          | ``                               | Comment body header part.            |
-| `body-footer`       |          | ``                               | Comment body footer part.            |
+| `body-header`       |          | `''`                             | Comment body header part.            |
+| `body-footer`       |          | `''`                             | Comment body footer part.            |
 | `github-token`      | YES      | `${{ github.token }}`            | GitHub token.                        |
 
 ## License
