@@ -1,18 +1,24 @@
-name: Coverage Summary Diff
+name: Simple Coverage Diff
+
 branding:
   icon: umbrella
   color: green
-description: Publish diff coverage report as PR comment.
+
+description: Comment coverage diff to PR.
+
 inputs:
+  head-summary-json:
+    description: Path of the json-summary file to analyze.
+    required: false
+    default: coverage/coverage-summary.json
+  base-summary-json:
+    description: Path of the json-summary file to compare.
+    required: true
   github-token:
     description: A GitHub token to write comments.
     required: true
-  coverage-filename:
-    description: Path of the json-summary file to analyze.
-    required: true
-  base-summary-filename:
-    description: Path of the json-summary file to compare.
-    required: true
+    default: ${{ github.token }}
+
 runs:
   using: node16
   main: dist/index.js

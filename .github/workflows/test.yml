@@ -20,6 +20,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+          cache: npm
       - name: npm install, build, and test
         run: |
           npm ci
@@ -33,5 +34,5 @@ jobs:
         uses: ./
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          coverage-filename: coverage/coverage-summary.json
-          base-summary-filename: coverage/coverage-summary.json
+          base-summary-json: coverage/coverage-summary.json
+          head-summary-json: coverage/coverage-summary.json

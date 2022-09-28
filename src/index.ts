@@ -6,11 +6,11 @@ import { diff } from "coverage-diff"
 
 async function main() {
   const githubToken = getInput("github-token")
-  const coverageFilename = getInput("coverage-filename")
-  const baseSummaryFilename = getInput("base-summary-filename")
+  const headSummaryJsonFilename = getInput("head-summary-json")
+  const baseSummaryJsonFileName = getInput("base-summary-json")
 
-  const coverage = JSON.parse(await readFile(coverageFilename, "utf-8"))
-  const baseSummary = JSON.parse(await readFile(baseSummaryFilename, "utf-8"))
+  const coverage = JSON.parse(await readFile(headSummaryJsonFilename, "utf-8"))
+  const baseSummary = JSON.parse(await readFile(baseSummaryJsonFileName, "utf-8"))
 
   const octokit = getOctokit(githubToken)
 
