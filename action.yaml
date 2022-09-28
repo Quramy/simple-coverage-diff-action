@@ -26,6 +26,18 @@ inputs:
     description: A GitHub token to write comments.
     required: true
     default: ${{ github.token }}
+  check-criteria:
+    description: See coverage-diff API doc.
+    required: false
+  coverage-threshold:
+    description: See coverage-diff API doc.
+    required: false
+  coverage-decrease-threshold:
+    description: See coverage-diff API doc.
+    required: false
+  new-file-coverage-threshold:
+    description: See coverage-diff API doc.
+    required: false
 
 runs:
   using: node16

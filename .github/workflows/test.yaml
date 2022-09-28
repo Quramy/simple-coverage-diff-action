@@ -38,13 +38,6 @@ jobs:
           base-summary-json: coverage/coverage-summary-base.json
           head-summary-json: coverage/coverage-summary-base.json
 
-      - name: Test action.yaml (Increase)
-        uses: ./
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          base-summary-json: coverage/coverage-summary-base.json
-          head-summary-json: coverage/coverage-summary.json
-
       - name: Test action.yaml (Header and Footer)
         uses: ./
         with:
@@ -56,3 +49,23 @@ jobs:
           body-footer: |
             ---
             [Link to GitHub](https://github.com)
+
+      - name: Test action.yaml (Increase with default)
+        uses: ./
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          base-summary-json: coverage/coverage-summary-base.json
+          head-summary-json: coverage/coverage-summary.json
+          body-header: |
+            ### Default coverage-diff options
+
+      - name: Test action.yaml (Increase with custom config)
+        uses: ./
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          base-summary-json: coverage/coverage-summary-base.json
+          head-summary-json: coverage/coverage-summary.json
+          body-header: |
+            ### Custom coverage-diff options
+          check-criteria: lines
+          coverage-threshold: 80
