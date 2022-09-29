@@ -2,6 +2,8 @@
 
 GitHub Action to comment coverage diff to your PR using [coverage-diff](https://www.npmjs.com/package/coverage-diff).
 
+![](screencapt.png)
+
 ## Usage
 
 ```yaml
