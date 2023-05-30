@@ -38,11 +38,11 @@ async function main() {
   const newFileCoverageThreshold = toInt(getInput("new-file-coverage-threshold"))
 
   if (!existsSync(headSummaryJsonFilename)) {
-    info(`Skip ${headSummaryJsonFilename} does not exist`)
+    info(`Skip because ${headSummaryJsonFilename} does not exist`)
     return
   }
   if (!existsSync(baseSummaryJsonFileName)) {
-    info(`Skip ${baseSummaryJsonFileName} does not exist`)
+    info(`Skip bacause ${baseSummaryJsonFileName} does not exist`)
     return
   }
 
