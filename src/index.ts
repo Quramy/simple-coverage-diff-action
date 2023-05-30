@@ -1,5 +1,6 @@
 import { cwd } from "node:process"
 import { relative } from "node:path"
+import { existsSync } from "node:fs"
 import { readFile } from "node:fs/promises"
 import { getInput, info } from "@actions/core"
 import { getOctokit, context } from "@actions/github"
@@ -35,6 +36,15 @@ async function main() {
   const coverageThreshold = toInt(getInput("coverage-threshold"))
   const coverageDecreaseThreshold = toInt(getInput("coverage-decrease-threshold"))
   const newFileCoverageThreshold = toInt(getInput("new-file-coverage-threshold"))
+
+  if (!existsSync(headSummaryJsonFilename)) {
+    info(`Skip because ${headSummaryJsonFilename} does not exist`)
+    return
+  }
+  if (!existsSync(baseSummaryJsonFileName)) {
+    info(`Skip bacause ${baseSummaryJsonFileName} does not exist`)
+    return
+  }
 
   const headSummary = JSON.parse(await readFile(headSummaryJsonFilename, "utf-8")) as JsonSummary
   const baseSummary = JSON.parse(await readFile(baseSummaryJsonFileName, "utf-8")) as JsonSummary
