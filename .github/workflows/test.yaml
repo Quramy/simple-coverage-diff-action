@@ -69,3 +69,14 @@ jobs:
             ### Custom coverage-diff options
           check-criteria: lines
           coverage-threshold: 80
+
+      - name: Test action.yaml (ENOTENT)
+        uses: ./
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          base-summary-json: coverage/coverage-summary-base.json
+          head-summary-json: coverage/not-existing-coverage-summary.json
+          body-header: |
+            ### Custom coverage-diff options
+          check-criteria: lines
+          coverage-threshold: 80
