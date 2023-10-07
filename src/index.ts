@@ -69,11 +69,35 @@ async function main() {
   const body = bodyHeader + "\n\n" + results + "\n\n" + bodyFooter
 
   if (issue_number != null) {
-    await octokit.rest.issues.createComment({
-      ...repo,
-      issue_number,
-      body,
-    })
+    let comment_id: number | undefined
+    if (bodyHeader.length > 0) {
+      const comments = await octokit.rest.issues.listComments({
+        ...repo,
+        issue_number,
+        per_page: 100,
+      })
+      if (comments.status === 200) {
+        for (const comment of comments.data) {
+          if (comment.body?.includes(bodyHeader)) {
+            comment_id = comment.id
+            break
+          }
+        }
+      }
+    }
+    if (comment_id !== undefined) {
+      await octokit.rest.issues.updateComment({
+        ...repo,
+        comment_id,
+        body,
+      })
+    } else {
+      await octokit.rest.issues.createComment({
+        ...repo,
+        issue_number,
+        body,
+      })
+    }
   } else {
     info("Skip because context does not have pull_request")
   }
