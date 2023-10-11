@@ -38,6 +38,10 @@ inputs:
   new-file-coverage-threshold:
     description: See coverage-diff API doc.
     required: false
+  update-if-exists:
+    description: If set, create or update a comment. This must be either `replace` or `append`
+    default: "append"
+    required: false
 
 runs:
   using: node16

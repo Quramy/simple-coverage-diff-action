@@ -16,6 +16,13 @@ function toInt(inputStr: string) {
   return Number.isNaN(x) ? undefined : x
 }
 
+function parseUpdateIfExists(inputStr: string) {
+  if (inputStr !== "replace" && inputStr !== "append") {
+    throw new Error(`update-if-exists must be replace or append`)
+  }
+  return inputStr === "replace"
+}
+
 function stripAbsolute(summaryJson: JsonSummary): JsonSummary {
   return Object.entries(summaryJson).reduce(
     (acc, [k, v]) => (k !== "total" && k.startsWith(pwd) ? { ...acc, [relative(pwd, k)]: v } : { ...acc, [k]: v }),
@@ -36,6 +43,7 @@ async function main() {
   const coverageThreshold = toInt(getInput("coverage-threshold"))
   const coverageDecreaseThreshold = toInt(getInput("coverage-decrease-threshold"))
   const newFileCoverageThreshold = toInt(getInput("new-file-coverage-threshold"))
+  const updateIfExists = parseUpdateIfExists(getInput("update-if-exists"))
 
   if (!existsSync(headSummaryJsonFilename)) {
     info(`Skip because ${headSummaryJsonFilename} does not exist`)
@@ -70,7 +78,7 @@ async function main() {
 
   if (issue_number != null) {
     let comment_id: number | undefined
-    if (bodyHeader.length > 0) {
+    if (updateIfExists && bodyHeader.length > 0) {
       const comments = await octokit.rest.issues.listComments({
         ...repo,
         issue_number,
@@ -78,7 +86,7 @@ async function main() {
       })
       if (comments.status === 200) {
         for (const comment of comments.data) {
-          if (comment.body?.includes(bodyHeader)) {
+          if (comment.body?.startsWith(bodyHeader + "\n\n")) {
             comment_id = comment.id
             break
           }

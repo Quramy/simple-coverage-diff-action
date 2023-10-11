@@ -36,6 +36,7 @@ jobs:
           head-summary-json: coverage/coverage-summary.json
           coverage-threshold: 80
           check-criteria: lines, branches
+          update-if-exists: replace
           github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
@@ -51,6 +52,7 @@ jobs:
 | `new-file-coverage-threshold` |          |                                  | See [coverage-diff docs](https://flaviusone.github.io/coverage-diff/interfaces/ConfigOptions.html). |
 | `body-header`                 |          | `''`                             | Comment body header part.                                                                           |
 | `body-footer`                 |          | `''`                             | Comment body footer part.                                                                           |
+| `update-if-exists`            |          | `append`                         | If set, create or update a comment. This must be either `replace` or `append`                       |
 | `github-token`                | YES      | `${{ github.token }}`            | GitHub token.                                                                                       |
 
 ## License
